@@ -94,7 +94,10 @@ export class SignIn extends React.Component {
                 if(response.statusText != 'OK'){
                     self.setState({errorMessage:'Login Failed.',isValid:false});
                 }
-                else{
+                if(!response.data){
+                    self.setState({errorMessage:'Login Failed.',isValid:false});
+                }
+                if(self.state.isValid){
                     self.setState({toHome:true});
                 }
             },function(errorResponse){
