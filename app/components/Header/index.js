@@ -1,0 +1,52 @@
+import React from 'react';
+import { FormattedMessage } from 'react-intl';
+
+import A from './A';
+import Img from './Img';
+import NavBar from './NavBar';
+import HeaderLink from './HeaderLink';
+import Banner from './banner.jpg';
+import messages from './messages';
+
+class Header extends React.Component { // eslint-disable-line react/prefer-stateless-function
+  render() {
+    return (
+      <div className="sl-header">
+        <div className="sl-header-left">
+        <div className="navicon-left hidden-md-down"><a id="btnLeftMenu" href=""><i className="icon ion-navicon-round"></i></a></div>
+        <div className="navicon-left hidden-lg-up"><a id="btnLeftMenuMobile" href=""><i className="icon ion-navicon-round"></i></a></div>
+      </div>
+      <div className="sl-header-right">
+        <nav className="nav">
+          <div className="dropdown">
+            <a href="" className="nav-link nav-link-profile" data-toggle="dropdown">
+              <span className="logged-name">Settings</span>
+            </a>
+            <div className="dropdown-menu dropdown-menu-header wd-200">
+              <ul className="list-unstyled user-profile-nav">
+                {/* <li><a href=""><i className="icon ion-ios-person-outline"></i> Edit Profile</a></li>
+                <li><a href=""><i className="icon ion-ios-gear-outline"></i> Settings</a></li>
+                <li><a href=""><i className="icon ion-ios-download-outline"></i> Downloads</a></li>
+                <li><a href=""><i className="icon ion-ios-star-outline"></i> Favorites</a></li>
+                <li><a href=""><i className="icon ion-ios-folder-outline"></i> Collections</a></li> */}
+                <li><a href="/signIn"><i className="icon ion-power"></i> Sign In</a></li>
+                <li><a href="/Register"><i className="icon ion-power"></i> Register</a></li>
+              </ul>
+            </div>
+          </div>
+        </nav>
+        <div className="navicon-right">
+          <a id="btnRightMenu" href="" className="pos-relative">
+            <i className="icon ion-ios-bell-outline"></i>
+           
+            <span className="square-8 bg-danger"></span>           
+          </a>
+        </div>
+      </div>
+    
+    </div>
+    );
+  }
+}
+
+export default Header;
