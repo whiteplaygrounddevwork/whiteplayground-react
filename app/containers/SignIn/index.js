@@ -2,6 +2,7 @@
 import React from 'react';
 import {connect} from 'react-redux';
 import {bindActionCreators} from 'redux';
+import  { Redirect } from 'react-router-dom';
 import {login} from '../../services/userService';
 
 export class SignIn extends React.Component {
@@ -11,7 +12,8 @@ export class SignIn extends React.Component {
             email: "",
             password:"",
             errorMessage:"",
-            isValid:true
+            isValid:true,
+            toHome:false
         };
         this.handleChange = this.handleChange.bind(this);
     }
@@ -36,11 +38,21 @@ export class SignIn extends React.Component {
             </div>                
         )
     }
+    closeErrorPopup(){
+        this.setState({
+            errorMessage:'',
+            isValid:true
+        })
+    }
 
     render(){
         const showErrors = !this.state.isValid? 
                             this.renderError()
                             : null;
+
+        if (this.state.toHome === true) {
+            return <Redirect to='/' />
+        }
         return(
             <div className="d-flex align-items-center justify-content-center bg-sl-primary ht-100v">
 
@@ -63,21 +75,30 @@ export class SignIn extends React.Component {
     }
 
     signIn(){
-        
+        this.setState({
+            errorMessage:'',
+            isValid:true
+        })
         var email = this.state.email;
         var password = this.state.password;
 
-        if(!email || !password || !confirmPassword){
+        if(!email || !password){
             this.setState({errorMessage:'All fields are required.',isValid:false});
         }else{
             var user ={
                 Email:email,
                 Password:password
             };
+            var self =this;
             login(user,function(response){
-                console.log(response)
+                if(response.statusText != 'OK'){
+                    self.setState({errorMessage:'Login Failed.',isValid:false});
+                }
+                else{
+                    self.setState({toHome:true});
+                }
             },function(errorResponse){
-                console.log(response)
+                self.setState({errorMessage:'Login Failed.',isValid:false});
             });
         }
     }

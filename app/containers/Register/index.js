@@ -2,6 +2,7 @@
 import React from 'react';
 import {connect} from 'react-redux';
 import {bindActionCreators} from 'redux';
+import  { Redirect } from 'react-router-dom';
 import {register} from '../../services/userService';
 
 export class Register extends React.Component {
@@ -13,7 +14,8 @@ export class Register extends React.Component {
             password:"",
             confirmPassword:"",
             errorMessage:"",
-            isValid:true
+            isValid:true,
+            toLogin:false
         };
         this.handleChange = this.handleChange.bind(this);
     }
@@ -50,6 +52,9 @@ export class Register extends React.Component {
         const showErrors = !this.state.isValid? 
                             this.renderError()
                             : null;
+        if (this.state.toLogin === true) {
+            return <Redirect to='/signIn' />
+         }
         return(
             <div className="d-flex align-items-center justify-content-center bg-sl-primary ht-md-100v">
             
@@ -77,7 +82,10 @@ export class Register extends React.Component {
     }
 
     signUp(){
-        
+        this.setState({
+            errorMessage:'',
+            isValid:true
+        })
         var email = this.state.email;
         var password = this.state.password;
         var confirmPassword = this.state.confirmPassword;
@@ -91,10 +99,16 @@ export class Register extends React.Component {
                 Email:email,
                 Password:password
             };
+            var self =this;
             register(user,function(response){
-                console.log(response)
+                if(response.statusText != 'OK'){
+                    self.setState({errorMessage:'Registration Failed.',isValid:false});
+                }
+                else{
+                    self.setState({toLogin:true});
+                }
             },function(errorResponse){
-                console.log(response)
+                self.setState({errorMessage:'Registration Failed.',isValid:false});
             });
         }
     }

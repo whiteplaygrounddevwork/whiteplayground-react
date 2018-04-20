@@ -30,16 +30,22 @@ export function register(user,callback,errorCallback){
 
 export function login(user,callback,errorCallback){    
     let url = 'https://wpg-dev-web.azurewebsites.net/api/Account/login';
+    var bodyFormData = new FormData();
+    bodyFormData.set('Email', user.Email);
+    bodyFormData.set('Password', user.Password);
     var authOptions = {
       method: 'POST',
       url: url,
-      data: user,
+      data: bodyFormData,
       headers: {
         'Content-Type': 'multipart/form-data'
       },
       json: true
     };
     axios(authOptions).then(function (response) {
+        if(response.statusText == 'OK'){
+            localStorage.setItem("access_token", response.data);
+        }        
         if (callback && typeof callback === "function"){
             callback(response);
           } 
