@@ -7,9 +7,36 @@ import NavBar from './NavBar';
 import HeaderLink from './HeaderLink';
 import Banner from './banner.jpg';
 import messages from './messages';
+import logOut from '../../services/userService'
 
 class Header extends React.Component { // eslint-disable-line react/prefer-stateless-function
+  constructor(props){
+    super(props);
+    this.state ={
+      toLogin:false
+    };
+    this.handleChange = this.handleChange.bind(this);
+}
+
   render() {
+
+    var is_logedIn = localStorage.getItem('is_logedIn');
+
+    const content = is_logedIn ? (
+      <ul className="list-unstyled user-profile-nav">
+        <li><a onClick={this.logOut.bind(this)}><i className="icon ion-power"></i> Sign In</a></li>
+      </ul>
+    ) : (
+      <ul className="list-unstyled user-profile-nav">
+        <li><a href="/signIn"><i className="icon ion-power"></i> Sign In</a></li>
+        <li><a href="/Register"><i className="icon ion-power"></i> Register</a></li>
+      </ul>
+    );
+
+    if (this.state.toLogin === true) {
+      return <Redirect to='/signIn' />
+   }
+   
     return (
       <div className="sl-header">
         <div className="sl-header-left">
@@ -23,15 +50,7 @@ class Header extends React.Component { // eslint-disable-line react/prefer-state
               <span className="logged-name">Settings</span>
             </a>
             <div className="dropdown-menu dropdown-menu-header wd-200">
-              <ul className="list-unstyled user-profile-nav">
-                {/* <li><a href=""><i className="icon ion-ios-person-outline"></i> Edit Profile</a></li>
-                <li><a href=""><i className="icon ion-ios-gear-outline"></i> Settings</a></li>
-                <li><a href=""><i className="icon ion-ios-download-outline"></i> Downloads</a></li>
-                <li><a href=""><i className="icon ion-ios-star-outline"></i> Favorites</a></li>
-                <li><a href=""><i className="icon ion-ios-folder-outline"></i> Collections</a></li> */}
-                <li><a href="/signIn"><i className="icon ion-power"></i> Sign In</a></li>
-                <li><a href="/Register"><i className="icon ion-power"></i> Register</a></li>
-              </ul>
+             {content}
             </div>
           </div>
         </nav>
@@ -46,6 +65,11 @@ class Header extends React.Component { // eslint-disable-line react/prefer-state
     
     </div>
     );
+  }
+
+  logOut(){
+    logOut();
+    this.setState({toLogin:true});
   }
 }
 

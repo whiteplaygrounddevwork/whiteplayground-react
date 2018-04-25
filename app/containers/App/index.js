@@ -17,6 +17,7 @@ import Register from 'containers/Register/Loadable';
 import NotFoundPage from 'containers/NotFoundPage/Loadable';
 import Header from 'components/Header';
 import Footer from 'components/Footer';
+import {PrivateRoute} from '../../utils/customRoute';
 
 const AppWrapper = styled.div`
   width:100%
@@ -35,9 +36,9 @@ export default function App() {
       >
       </Helmet>
       <Switch>
-        <Route exact path="/" component={HomePage} />
+        <PrivateRoute authed={localStorage.getItem('is_logedIn')} exact path="/" component={HomePage} />
         <Route path="/signIn" component={SignIn} />
-        <Route path="/Register" component={Register} />
+        <Route path="/Register" component={Register} />        
         <Route path="" component={NotFoundPage} />
       </Switch>
     </AppWrapper>

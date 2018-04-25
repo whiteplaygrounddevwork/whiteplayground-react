@@ -45,6 +45,7 @@ export function login(user,callback,errorCallback){
     axios(authOptions).then(function (response) {
         if(response.statusText == 'OK'){
             localStorage.setItem("access_token", response.data);
+            localStorage.setItem("is_logedIn", true);
         }        
         if (callback && typeof callback === "function"){
             callback(response);
@@ -55,4 +56,9 @@ export function login(user,callback,errorCallback){
             errorCallback(err);
           }
       })
+}
+
+export function logOut(){
+        localStorage.removeItem("access_token");
+        localStorage.removeItem("is_logedIn");
 }

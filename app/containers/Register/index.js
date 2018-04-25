@@ -101,8 +101,9 @@ export class Register extends React.Component {
             };
             var self =this;
             register(user,function(response){
-                if(response.statusText != 'OK'){
-                    self.setState({errorMessage:'Registration Failed.',isValid:false});
+                debugger;
+                if(!response.data.isPassed){
+                    self.setState({errorMessage:response.data.message,isValid:false});
                 }
                 else{
                     self.setState({toLogin:true});
