@@ -3,6 +3,7 @@ import React from 'react';
 import {connect} from 'react-redux';
 import {bindActionCreators} from 'redux';
 import  { Redirect } from 'react-router-dom';
+import LoadingIndicator from '../LoadinIndicator/LoadingIndicator';
 import {login} from '../../services/userService';
 
 export class SignIn extends React.Component {
@@ -13,7 +14,8 @@ export class SignIn extends React.Component {
             password:"",
             errorMessage:"",
             isValid:true,
-            toHome:false
+            toHome:false,            
+            isLoading:false
         };
         this.handleChange = this.handleChange.bind(this);
     }
@@ -38,6 +40,7 @@ export class SignIn extends React.Component {
             </div>                
         )
     }
+
     closeErrorPopup(){
         this.setState({
             errorMessage:'',
@@ -45,17 +48,25 @@ export class SignIn extends React.Component {
         })
     }
 
+    renderLoadingIndicaor(){
+        return(
+            <LoadingIndicator/>
+        );
+    }
+
     render(){
         const showErrors = !this.state.isValid? 
                             this.renderError()
                             : null;
+        
+        const loadingIndicator = this.state.isLoading?this.renderLoadingIndicaor():null;
 
         if (this.state.toHome === true) {
             return <Redirect to='/' />
         }
         return(
             <div className="d-flex align-items-center justify-content-center bg-sl-primary ht-100v">
-
+            {loadingIndicator}
                 <div className="login-wrapper wd-300 wd-xs-350 pd-25 pd-xs-40 bg-white">
                     <div className="signin-logo tx-center tx-24 tx-bold tx-inverse">starlight <span className="tx-info tx-normal">admin</span></div>
                     <div className="tx-center mg-b-60">Professional Admin Template Design</div>
@@ -77,13 +88,14 @@ export class SignIn extends React.Component {
     signIn(){
         this.setState({
             errorMessage:'',
-            isValid:true
+            isValid:true,
+            isLoading:true
         })
         var email = this.state.email;
         var password = this.state.password;
 
         if(!email || !password){
-            this.setState({errorMessage:'All fields are required.',isValid:false});
+            this.setState({errorMessage:'All fields are required.',isValid:false,isLoading:false});
         }else{
             var user ={
                 Email:email,
@@ -100,8 +112,9 @@ export class SignIn extends React.Component {
                 if(self.state.isValid){
                     self.setState({toHome:true});
                 }
+                self.setState({isLoading :false });
             },function(errorResponse){
-                self.setState({errorMessage:'Login Failed.',isValid:false});
+                self.setState({errorMessage:'Login Failed.',isValid:false,isLoading:false});
             });
         }
     }

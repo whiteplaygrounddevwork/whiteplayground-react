@@ -1,13 +1,13 @@
 import React from 'react';
 import { FormattedMessage } from 'react-intl';
-
+import  { Redirect } from 'react-router-dom';
 import A from './A';
 import Img from './Img';
 import NavBar from './NavBar';
 import HeaderLink from './HeaderLink';
 import Banner from './banner.jpg';
 import messages from './messages';
-import logOut from '../../services/userService'
+import {logOut} from '../../services/userService'
 
 class Header extends React.Component { // eslint-disable-line react/prefer-stateless-function
   constructor(props){
@@ -15,7 +15,7 @@ class Header extends React.Component { // eslint-disable-line react/prefer-state
     this.state ={
       toLogin:false
     };
-    this.handleChange = this.handleChange.bind(this);
+    
 }
 
   render() {
@@ -24,7 +24,7 @@ class Header extends React.Component { // eslint-disable-line react/prefer-state
 
     const content = is_logedIn ? (
       <ul className="list-unstyled user-profile-nav">
-        <li><a onClick={this.logOut.bind(this)}><i className="icon ion-power"></i> Sign In</a></li>
+        <li><a onClick={this.logOut.bind(this)}><i className="icon ion-power"></i> Sign Out</a></li>
       </ul>
     ) : (
       <ul className="list-unstyled user-profile-nav">
@@ -36,7 +36,7 @@ class Header extends React.Component { // eslint-disable-line react/prefer-state
     if (this.state.toLogin === true) {
       return <Redirect to='/signIn' />
    }
-   
+
     return (
       <div className="sl-header">
         <div className="sl-header-left">

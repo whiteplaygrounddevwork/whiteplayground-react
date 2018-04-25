@@ -4,6 +4,7 @@ import {connect} from 'react-redux';
 import {bindActionCreators} from 'redux';
 import  { Redirect } from 'react-router-dom';
 import {register} from '../../services/userService';
+import LoadingIndicator from '../LoadinIndicator/LoadingIndicator';
 
 export class Register extends React.Component {
 
@@ -15,7 +16,8 @@ export class Register extends React.Component {
             confirmPassword:"",
             errorMessage:"",
             isValid:true,
-            toLogin:false
+            toLogin:false,
+            isLoading:false
         };
         this.handleChange = this.handleChange.bind(this);
     }
@@ -48,16 +50,27 @@ export class Register extends React.Component {
         })
     }
 
+    renderLoadingIndicaor(){
+        return(
+            <LoadingIndicator/>
+        );
+    }
+
     render(){
+        
         const showErrors = !this.state.isValid? 
                             this.renderError()
                             : null;
+
+        const loadingIndicator = this.state.isLoading?this.renderLoadingIndicaor():null;
+        
         if (this.state.toLogin === true) {
             return <Redirect to='/signIn' />
          }
+
         return(
             <div className="d-flex align-items-center justify-content-center bg-sl-primary ht-md-100v">
-            
+            {loadingIndicator}
 
                 <div className="login-wrapper wd-300 wd-xs-400 pd-25 pd-xs-40 bg-white">
                     <div className="signin-logo tx-center tx-24 tx-bold tx-inverse">starlight <span className="tx-info tx-normal">admin</span></div>
@@ -84,16 +97,17 @@ export class Register extends React.Component {
     signUp(){
         this.setState({
             errorMessage:'',
-            isValid:true
+            isValid:true,
+            isLoading:true
         })
         var email = this.state.email;
         var password = this.state.password;
         var confirmPassword = this.state.confirmPassword;
 
         if(!email || !password || !confirmPassword){
-            this.setState({errorMessage:'All fields are required.',isValid:false});
+            this.setState({errorMessage:'All fields are required.',isValid:false,isLoading:false});
         }else if(password !== confirmPassword){
-            this.setState({errorMessage:'Passwords do not match.',isValid:false});
+            this.setState({errorMessage:'Passwords do not match.',isValid:false,isLoading:false});
         }else{
             var user ={
                 Email:email,
@@ -101,15 +115,15 @@ export class Register extends React.Component {
             };
             var self =this;
             register(user,function(response){
-                debugger;
                 if(!response.data.isPassed){
                     self.setState({errorMessage:response.data.message,isValid:false});
                 }
                 else{
                     self.setState({toLogin:true});
                 }
+                self.setState({isLoading :false });
             },function(errorResponse){
-                self.setState({errorMessage:'Registration Failed.',isValid:false});
+                self.setState({errorMessage:'Registration Failed.',isValid:false,isLoading:false});
             });
         }
     }

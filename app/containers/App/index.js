@@ -36,7 +36,7 @@ export default function App() {
       >
       </Helmet>
       <Switch>
-        <PrivateRoute authed={localStorage.getItem('is_logedIn')} exact path="/" component={HomePage} />
+        <Route exact path="/" component={HomePage} />
         <Route path="/signIn" component={SignIn} />
         <Route path="/Register" component={Register} />        
         <Route path="" component={NotFoundPage} />
