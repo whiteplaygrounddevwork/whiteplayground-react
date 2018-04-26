@@ -8,6 +8,7 @@ import NotFoundPage from 'containers/NotFoundPage/Loadable';
 import Header from 'components/Header';
 import Footer from 'components/Footer';
 import LeftMenu from 'components/LeftMenu';
+import  { Redirect } from 'react-router-dom';
 
 
 const AppWrapper = styled.div`
@@ -20,6 +21,13 @@ const AppWrapper = styled.div`
 
 export class HomePage extends React.Component { 
 
+  constructor(props){
+    super(props);
+    this.state ={
+        toLogin:localStorage.getItem('is_logedIn') && localStorage.getItem('access_token'), 
+    };
+}
+
   componentDidMount() {
     if (this.props.username && this.props.username.trim().length > 0) {
       this.props.onSubmitForm();
@@ -27,6 +35,10 @@ export class HomePage extends React.Component {
   }
 
   render() {
+    if (!this.state.toLogin) {
+      return <Redirect to='/signIn' />
+   }
+
     return (
       <AppWrapper>
       <Helmet
