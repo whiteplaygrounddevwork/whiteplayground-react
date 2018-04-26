@@ -29,7 +29,7 @@ export function register(user,callback,errorCallback){
 }
 
 export function login(user,callback,errorCallback){    
-    let url = 'http://localhost:55335/api/Account/login';
+    let url = 'https://wpg-dev-web.azurewebsites.net/api/Account/login';
     var bodyFormData = new FormData();
     bodyFormData.set('Email', user.Email);
     bodyFormData.set('Password', user.Password);
