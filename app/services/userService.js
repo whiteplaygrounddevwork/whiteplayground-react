@@ -1,12 +1,14 @@
 "use strict"
 import axios from 'axios';
+import {BaseUrl,SignInUrl,SignUpUrl} from '../constants/endPoints'
+import { basename } from 'path';
 
 
 export function register(user,callback,errorCallback){
     var bodyFormData = new FormData();
     bodyFormData.set('Email', user.Email);
     bodyFormData.set('Password', user.Password);
-    let url = 'https://wpg-dev-web.azurewebsites.net/api/Account/Register';
+    let url = BaseUrl + SignUpUrl;
     var authOptions = {
       method: 'POST',
       url: url,
@@ -29,7 +31,7 @@ export function register(user,callback,errorCallback){
 }
 
 export function login(user,callback,errorCallback){    
-    let url = 'https://wpg-dev-web.azurewebsites.net/api/Account/login';
+    let url = BaseUrl + SignUpUrl;
     var bodyFormData = new FormData();
     bodyFormData.set('Email', user.Email);
     bodyFormData.set('Password', user.Password);
