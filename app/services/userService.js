@@ -38,7 +38,7 @@ export function login(user,callback,errorCallback){
       url: url,
       data: bodyFormData,
       headers: {
-        'Content-Type': 'multipart/form-data'
+        'Content-Type': 'application/json'
       },
       json: true
     };
@@ -61,4 +61,5 @@ export function login(user,callback,errorCallback){
 export function logOut(){
         localStorage.removeItem("access_token");
         localStorage.removeItem("is_logedIn");
+        document.cookie = "rememberMe=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;";
 }

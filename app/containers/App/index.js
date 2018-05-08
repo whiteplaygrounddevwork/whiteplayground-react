@@ -18,6 +18,7 @@ import NotFoundPage from 'containers/NotFoundPage/Loadable';
 import Header from 'components/Header';
 import Footer from 'components/Footer';
 import {PrivateRoute} from '../../utils/customRoute';
+import {logOut} from '../../services/userService';
 
 const AppWrapper = styled.div`
   width:100%

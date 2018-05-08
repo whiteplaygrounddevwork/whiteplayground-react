@@ -78,6 +78,10 @@ export class SignIn extends React.Component {
                         <input type="password" className="form-control" name='password' placeholder="Enter your password" onChange={this.handleChange}/>
                     <a href="" className="tx-info tx-12 d-block mg-t-10">Forgot password?</a>
                     </div>
+                    <div>
+                    <input type="checkbox" class="custom-control-input" name="rememberMe" id="rememberMeChkBox"/>
+                    <label class="custom-control custom-checkbox" for="rememberMeChkBox">Remember me</label>                    
+                    </div>
                     <button onClick={this.signIn.bind(this)} className="btn btn-info btn-block">Sign In</button>
                     <div className="mg-t-60 tx-center">Not yet a member? <a href="/Register" className="tx-info">Sign Up</a></div>
                 </div>
@@ -110,6 +114,13 @@ export class SignIn extends React.Component {
                     self.setState({errorMessage:'Login Failed.',isValid:false});
                 }
                 if(self.state.isValid){
+                    debugger;
+                    var isRemeberMeChecked = document.getElementById('rememberMeChkBox').checked;
+                    if(isRemeberMeChecked){
+                        var now = new Date(); //get the current date
+                        now.setMonth(now.getMonth() + 1); //add one month to it
+                        document.cookie = "rememberMe=true; expires=" + now.toUTCString() + "; path=/";
+                    }                    
                     self.setState({toHome:true});
                 }
                 self.setState({isLoading :false });

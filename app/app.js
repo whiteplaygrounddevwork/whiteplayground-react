@@ -49,30 +49,30 @@ import { translationMessages } from './i18n';
 // Import CSS reset and Global Styles
 import './global-styles';
 
-import '../lib/jquery/jquery';
-import '../lib/popper.js/popper';
-import '../lib/bootstrap/bootstrap';
-import '../lib/jquery-ui/jquery-ui';
-import '../lib/perfect-scrollbar/js/perfect-scrollbar.jquery';
-import '../lib/jquery.sparkline.bower/jquery.sparkline.min';
-import '../lib/d3/d3';
-import '../lib/rickshaw/rickshaw.min';
-import '../lib/chart.js/Chart';
-import '../lib/Flot/jquery.flot';
-import '../lib/Flot/jquery.flot.pie';
-import '../lib/Flot/jquery.flot.resize';
-import '../lib/flot-spline/jquery.flot.spline';
+import './resources/lib/jquery/jquery';
+import './resources/lib/popper.js/popper';
+import './resources/lib/bootstrap/bootstrap';
+import './resources/lib/jquery-ui/jquery-ui';
+import './resources/lib/perfect-scrollbar/js/perfect-scrollbar.jquery';
+import './resources/lib/jquery.sparkline.bower/jquery.sparkline.min';
+import './resources/lib/d3/d3';
+import './resources/lib/rickshaw/rickshaw.min';
+import './resources/lib/chart.js/Chart';
+import './resources/lib/Flot/jquery.flot';
+import './resources/lib/Flot/jquery.flot.pie';
+import './resources/lib/Flot/jquery.flot.resize';
+import './resources/lib/flot-spline/jquery.flot.spline';
 
-import '../js/starlight';
-import '../js/ResizeSensor';
-import '../js/dashboard';
+import './resources/js/starlight';
+import './resources/js/ResizeSensor';
+import './resources/js/dashboard';
 
 
-import '../css/starlight.css';
-import '../lib/font-awesome/css/font-awesome.css';
-import '../lib/Ionicons/css/ionicons.css';
-import '../lib/perfect-scrollbar/css/perfect-scrollbar.css';
-import '../lib/rickshaw/rickshaw.min.css';
+import './resources/css/starlight.css';
+import './resources/lib/font-awesome/css/font-awesome.css';
+import './resources/lib/Ionicons/css/ionicons.css';
+import './resources/lib/perfect-scrollbar/css/perfect-scrollbar.css';
+import './resources/lib/rickshaw/rickshaw.min.css';
 
 
 

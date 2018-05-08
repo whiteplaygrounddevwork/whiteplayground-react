@@ -20,7 +20,7 @@ class Header extends React.Component { // eslint-disable-line react/prefer-state
 
   render() {
 
-    var is_logedIn = localStorage.getItem('is_logedIn');
+    var is_logedIn = localStorage.getItem('is_logedIn') ||document.cookie;
 
     const content = is_logedIn ? (
       <ul className="list-unstyled user-profile-nav">
