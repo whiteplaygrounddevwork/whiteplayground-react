@@ -76,11 +76,11 @@ export class SignIn extends React.Component {
                     </div>
                     <div className="form-group">
                         <input type="password" className="form-control" name='password' placeholder="Enter your password" onChange={this.handleChange}/>
-                    <a href="" className="tx-info tx-12 d-block mg-t-10">Forgot password?</a>
+                        <a href="" className="tx-info tx-12 d-block mg-t-10">Forgot password?</a>
                     </div>
-                    <div>
-                    <input type="checkbox" className="custom-control-input" name="rememberMe" id="rememberMeChkBox"/>
-                    <label className="custom-control custom-checkbox" for="rememberMeChkBox">Remember me</label>                    
+                    <div className="form-group">
+                        <input type="checkbox"  name="rememberMe" id="rememberMeChkBox"/>
+                        <label className="custom-control custom-checkbox" for="rememberMeChkBox">Remember me</label>                    
                     </div>
                     <button onClick={this.signIn.bind(this)} className="btn btn-info btn-block">Sign In</button>
                     <div className="mg-t-60 tx-center">Not yet a member? <a href="/Register" className="tx-info">Sign Up</a></div>
