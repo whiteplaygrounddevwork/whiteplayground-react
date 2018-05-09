@@ -31,7 +31,7 @@ export function register(user,callback,errorCallback){
 }
 
 export function login(user,callback,errorCallback){    
-    let url = BaseUrl + SignUpUrl;
+    let url = BaseUrl + SignInUrl;
     var bodyFormData = new FormData();
     bodyFormData.set('Email', user.Email);
     bodyFormData.set('Password', user.Password);
